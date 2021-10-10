@@ -8,14 +8,26 @@
       </h1>
     </div>
 
-    <div class="row">
-      <div class="input-group input-group-lg col-md-12">
-        <app-search-box
-           (loading)="loading = $event"
-           (results)="updateResults($event)"
-            ></app-search-box>
-      </div>
+<!--    <div class="row">-->
+<!--      <div class="input-group input-group-lg col-md-12">-->
+<!--        <app-search-box-->
+<!--           (loading)="loading = $event"-->
+<!--           (results)="updateResults($event)"-->
+<!--            ></app-search-box>-->
+<!--      </div>-->
+<!--    </div>-->
+
+  <div class="row">
+    <div class="input-group input-group-lg col-md-12">
+      <app-search-form
+        (loading)="loading = $event"
+        (results)="updateResults($event)"
+      ></app-search-form>
     </div>
+  </div>
+
+<!--  <button type="button" class="btn btn-primary" (click)="getOldLocalStorage()">LocalStorage</button>-->
+
 
     <div class="row">
       <app-search-result

@@ -1,0 +1,33 @@
+
+<div class="container">
+   <!-- ///////////////////////////////////////////////////////////////////////////////// -->
+  <div class="btn-group">
+    <button type="button" class="btn btn-default" [class.active]="buttonActive === env.buttonActive" (click)="buttonActive = env.buttonActive">Search in all categories</button>
+    <!--  <button type="button" class="btn btn-default">Right</button>-->
+    <app-search-type *ngFor="let btn of buttons"
+                     [button]="btn" (buttonActive)="updateButtonActive($event)" [activBtn]="buttonActive"
+    ></app-search-type>
+  </div>
+  <!-- ///////////////////////////////////////////////////////////////////////////////// -->
+  <div *ngIf="form.get('textInput').invalid && form.get('textInput').touched" class="ng-invalid error-massege">
+    Enter at least 2 characters
+  </div>
+  <!-- ///////////////////////////////////////////////////////////////////////////////// -->
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-group row">
+<!--      <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>-->
+<!--      <div class="col-sm-10">-->
+      <div class="col-sm-12">
+<!--        <input type="text" class="form-control" id="inputted" placeholder="Search" formControl="textInput">-->
+        <input type="text" class="form-control" placeholder="Search" formControlName="textInput">
+      </div>
+    </div>
+
+
+    <div class="form-group row">
+      <div class="offset-sm-2 col-sm-10">
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Find</button>
+      </div>
+    </div>
+  </form>
+</div>

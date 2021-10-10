@@ -1,0 +1,10 @@
+      <li routerLinkActive="active"><a [routerLink]="['/']"
+      [queryParams]="{
+      time: this.elem.time,
+      inputText: this.elem.inputText,
+      tipe: this.elem.tipe
+      }"
+      >{{elem.time | date: "long" }} ||| {{elem.inputText}} ||| {{elem.tipe}}</a></li>
+
+
+

@@ -29,6 +29,11 @@ export class SearchBoxComponent implements OnInit {
   @Output() loading: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() results: EventEmitter<SearchResult[]> = new EventEmitter<SearchResult[]>();
 
+  // typeQuery = 'channel';
+  // typeQuery = 'channel';
+  // typeQuery = 'video';
+  typeQuery = 'null';
+
   constructor(private youtube: YouTubeSearchService,
               private el: ElementRef) {
   }
@@ -41,7 +46,7 @@ export class SearchBoxComponent implements OnInit {
       .debounceTime(250)                         // only once every 250ms
       .do(() => this.loading.emit(true))         // enable loading
       // search, discarding old events if new input comes in
-      .map((query: string) => this.youtube.search(query))
+      .map((query: string) => this.youtube.search(query, this.typeQuery))
       .switch()
       // act on the return of the search
       .subscribe(

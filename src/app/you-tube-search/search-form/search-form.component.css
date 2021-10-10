@@ -1,0 +1,10 @@
+
+/*form-control ng-pristine ng-invalid ng-touched*/
+
+.ng-invalid .ng-touched {
+  border-color: red;
+}
+
+.error-massege {
+  color: red;
+}

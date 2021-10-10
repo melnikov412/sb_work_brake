@@ -7,6 +7,7 @@ import {
 
 import { Observable } from 'rxjs/Rx';
 import { SearchResult } from './search-result.model';
+import {SearchParamsModel} from './search-params.model';
 
 /*
   This API key may or may not work for you. Your best bet is to issue your own
@@ -19,10 +20,11 @@ import { SearchResult } from './search-result.model';
   your browser is "localhost"
 */
 export const YOUTUBE_API_KEY =
-  'AIzaSyDOfT_BO81aEZScosfTYMruJobmpjqNeEk';
+  'AIzaSyCkF0FeQxgvG8Oe8NWX_LDnPsjSFYvpRgI';
+  // 'AIzaSyDOfT_BO81aEZScosfTYMruJobmpjqNeEk';
 export const YOUTUBE_API_URL =
   'https://www.googleapis.com/youtube/v3/search';
-//'https://www.googleapis.com/youtube/v3/channels';
+// 'https://www.googleapis.com/youtube/v3/channels';
 
 /**
  * YouTubeService connects to the YouTube API
@@ -30,31 +32,50 @@ export const YOUTUBE_API_URL =
  */
 @Injectable()
 export class YouTubeSearchService {
+
   constructor(
     private http: HttpClient,
     @Inject(YOUTUBE_API_KEY) private apiKey: string,
     @Inject(YOUTUBE_API_URL) private apiUrl: string
   ) {}
 
-  search(query: string): Observable<SearchResult[]> {
+  search(query: string, typeQuery: string | null): Observable<SearchResult[]> {
     const params: string = [
       `q=${query}`,
       `key=${this.apiKey}`,
-      `type=video`,
+      `type=${typeQuery}`,
       `part=snippet`,
       `maxResults=10`
     ].join('&');
     const queryUrl = `${this.apiUrl}?${params}`;
+    // console.log('////// queryUrl: ', queryUrl);
     return this.http.get(queryUrl).map(response => {
       return <any>response['items'].map(item => {
-         console.log("raw item", item); // uncomment if you want to debug
+       // console.log('raw item', item); // uncomment if you want to debug
         return new SearchResult({
           id: item.id.videoId,
           title: item.snippet.title,
           description: item.snippet.description,
-          thumbnailUrl: item.snippet.thumbnails.high.url
+          thumbnailUrl: item.snippet.thumbnails.high.url,
+          publishedAt: item.snippet.publishedAt,
+          kind: item.id.kind
         });
       });
     });
   }
+
+  getFromLocalStorage(index: string): SearchParamsModel[] | null {
+      return  JSON.parse(localStorage.getItem(index));
+  }
+
+  setLocalStorageParams(params: SearchParamsModel): void {
+    const tempArray = this.getFromLocalStorage('index');
+    if (tempArray) {
+      tempArray.unshift(params);
+      localStorage.setItem('index', JSON.stringify(tempArray));
+    }else {
+      localStorage.setItem('index', JSON.stringify([params]));
+    }
+  }
+
 }

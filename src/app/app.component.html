@@ -1,3 +1,34 @@
+
+<nav class="navbar navbar-default" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <a [routerLink]="['/']">YouTube Search</a></li>
+      <li routerLinkActive="active"><a [routerLink]="['/searchlist']">Search List</a></li>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</nav>
+
+<!-- ............................................... -->
+
+<!--<div class="btn-group">-->
+<!--  <button type="button" class="btn btn-default" [class.active]="buttonActive == 'all'" (click)="buttonActive = 'all'">Search in all categories</button>-->
+<!--&lt;!&ndash;  <button type="button" class="btn btn-default active">Middle</button>&ndash;&gt;-->
+<!--&lt;!&ndash;  <button type="button" class="btn btn-default">Right</button>&ndash;&gt;-->
+<!--  <app-search-type-buttons *ngFor="let btn of buttons"-->
+<!--                           [button]="btn" (buttonActive)="updateButtonActive($event)" [activBtn]="buttonActive"-->
+<!--  ></app-search-type-buttons>-->
+<!--</div>-->
+
+<!-- ............................................... -->
+
+<!--<app-buttons-radioreactive></app-buttons-radioreactive>-->
+
+
 <div class="container">
-  <app-you-tube-search></app-you-tube-search>
+  <router-outlet></router-outlet>
+<!--  <app-you-tube-search></app-you-tube-search>-->
 </div>

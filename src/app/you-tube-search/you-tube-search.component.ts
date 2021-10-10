@@ -9,6 +9,10 @@ export class YouTubeSearchComponent implements OnInit {
   results: SearchResult[];
   loading: boolean;
 
+  // printResult() {
+  //   console.log('RESULT: ', this.results);
+  // };
+
   constructor() { }
   ngOnInit() { }
 
@@ -16,4 +20,5 @@ export class YouTubeSearchComponent implements OnInit {
     this.results = results;
     // console.log("results:", this.results); // uncomment to take a look
   }
+
 }
